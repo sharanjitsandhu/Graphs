@@ -17,7 +17,7 @@ class Graph:
         if vertex not in self.vertices:
             self.vertices[vertex] = set()
         else:
-            print("Warning! Vertex does not exist.")
+            print("Warning! Vertex does exist.")
 
     def add_edge(self, v_from, v_to):
         """
@@ -26,14 +26,27 @@ class Graph:
         if v_from in self.vertices and v_to in self.vertices:
             self.vertices[v_from].add(v_to)
         else:
-            print("Warning! Supplied vertex does exist.")
+            print("Warning! Supplied vertex does not exist.")
 
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        q = Queue()  # Instantiate an object of type Queue
+        # manually enqueue(add an item to a queue) the first vertex
+        q.enqueue(starting_vertex)
+        found = set()
+
+        # find and record all of the edges
+        while q.size() > 0:
+            vertex = q.dequeue()
+            # for each node in queue, enqueue it
+            if vertex not in found:
+                found.add(vertex)
+                for node in self.vertices[vertex]:
+                    q.enqueue(node)
+                    print(vertex)
 
     def dft(self, starting_vertex):
         """
