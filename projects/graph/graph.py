@@ -46,14 +46,25 @@ class Graph:
                 found.add(vertex)
                 for node in self.vertices[vertex]:
                     q.enqueue(node)
-                    print(vertex)
+        print(f'BFT: {found}')
 
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # Create an empty stack and push the starting vertex
+        s = Stack()
+        s.push(starting_vertex)
+        found = []
+        # While the stack is not empty...
+        while s.size() > 0:
+            current = s.pop()
+            if current not in found:
+                found.append(current)
+                for next_vertex in self.vertices[current]:
+                    s.push(next_vertex)
+        print(f'DFT: {found}')
 
     def dft_recursive(self, starting_vertex):
         """
