@@ -1,14 +1,21 @@
+import random  # built-in library
+import math
 
 
 class User:
     def __init__(self, name):
         self.name = name
 
+
 class SocialGraph:
     def __init__(self):
         self.lastID = 0
         self.users = {}
         self.friendships = {}
+
+    def __repr__():
+        # to display string output
+        return f'Friendships: {self.friendships}'
 
     def addFriendship(self, userID, friendID):
         """
@@ -45,6 +52,22 @@ class SocialGraph:
         self.users = {}
         self.friendships = {}
         # !!!! IMPLEMENT ME
+        for i in range(0, numUsers):
+            self.addUser(f'Hulk{i}')  # cloning Hulk
+
+        possibleFriendships = []
+        for userID in self.users:
+            for friendID in range(userID + 1, self.lastID + 1):
+                possibleFriendships.append((userID, friendID))
+        random.shuffle(possibleFriendships)
+        # # "//" integer division
+        # random.sample(possibleFriendships, (numUsers * avgFriendships) // 2)
+
+        for i in range(0, math.floor(numUsers * avgFriendships / 2)):
+            friendship = possibleFriendships[i]
+            # friendship[0], friendship[1] grabbing 1st and 2nd item in the tuple i.e.
+            # possibleFriendships.append((userID, friendID))
+            self.addFriendship(friendship[0], friendship[1])
 
         # Add users
 
