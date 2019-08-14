@@ -52,6 +52,9 @@ class SocialGraph:
         self.lastID = 0
         self.users = {}
         self.friendships = {}
+
+        # debugCountCalls = 0
+
         # !!!! IMPLEMENT ME
         for i in range(0, numUsers):
             self.addUser(f'Hulk{i}')  # cloning Hulk
@@ -69,6 +72,9 @@ class SocialGraph:
             # friendship[0], friendship[1] grabbing 1st and 2nd item in the tuple i.e.
             # possibleFriendships.append((userID, friendID))
             self.addFriendship(friendship[0], friendship[1])
+# testing first que ...............#
+            # debugCountCalls += 1
+        # print(f'addFriendship() called {debugCountCalls} times')
 
         # Add users
 
@@ -109,6 +115,15 @@ class SocialGraph:
 if __name__ == '__main__':
     sg = SocialGraph()
     sg.populateGraph(10, 2)
+    # sg.populateGraph(100, 10) uncomment to reveal answer of the first que
     print(sg.friendships)
     connections = sg.getAllSocialPaths(1)
     print(connections)
+
+# Uncomment this code to reveal answer of 2nd que
+    # total = 0
+    # for userID in connections:
+    #     # minus 1 below indicates that we don't count that user as a connection
+    #     total += len(connections[userID]) - 1
+    # print(len(connections))  # length of total number of connections
+    # print(total / len(connections))  # average per user
