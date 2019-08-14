@@ -1,5 +1,6 @@
 import random  # built-in library
 import math
+from util import Queue
 
 
 class User:
@@ -84,6 +85,24 @@ class SocialGraph:
         """
         visited = {}  # Note that this is a dictionary, not a set
         # !!!! IMPLEMENT ME
+        q = Queue()
+        q.enqueue([userID])  # adding start ID to the queue
+
+        while q.size() > 0:  # while queue is not empty
+            path = q.dequeue()  # trying to find paths
+            newUserID = path[-1]  # end of the path
+            if newUserID not in visited:
+                visited[newUserID] = path
+                for friendID in self.friendships[newUserID]:
+                    if friendID not in visited:
+                        # creating a new list instead of referencing the existing list
+                        # i.e. we are making  a copy in this scope so that we can preserve the previous one,
+                        # in case we end of discarded
+                        new_path = list(path)
+                        # append path with our friend ID
+                        new_path.append(friendID)
+                        q.enqueue(new_path)
+
         return visited
 
 
